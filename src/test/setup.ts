@@ -46,7 +46,7 @@ afterEach(() => {
 // Export test utilities
 export const createTestingPinia = () => createPinia();
 
-export const createWrapper = (component: Component, options = {}) => {
+export const createWrapper = (component: Component, options: { global?: Record<string, any>; [key: string]: any } = {}) => {
   return mount(component, {
     global: {
       plugins: [vuetify, createTestingPinia()],

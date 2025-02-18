@@ -12,6 +12,7 @@
       </v-col>
       <v-col cols="12" md="8">
         <DataTableCrud
+          ref="dataTableRef"
           title="Tours"
           item-name="Tour"
           :headers="headers"
@@ -26,6 +27,7 @@
           @create="createTour"
           @update="updateTour"
           @delete="deleteTour"
+          @row-click="handleRowClick"
         >
           <template #dialog-form="{ formData, updateForm }">
             <v-row>
@@ -167,6 +169,9 @@ const defaultTour: Omit<Tour, 'id' | 'createdAt' | 'updatedAt'> = {
   },
 };
 
+// Add ref for DataTableCrud
+const dataTableRef = ref();
+
 // CRUD operations
 async function createTour(tour: Omit<Tour, 'id' | 'createdAt' | 'updatedAt'>) {  
   try {
@@ -280,5 +285,9 @@ function handleItemsPerPageChange(itemsPerPage: number) {
     limit: itemsPerPage.toString(),
     page: '1' // Reset to first page when changing items per page
   });
+}
+
+function handleRowClick(item: Tour) {
+  selectedId.value = item.id;
 }
 </script> 

@@ -191,6 +191,7 @@ const emit = defineEmits<{
   'update:page': [page: number];
   'update:items-per-page': [itemsPerPage: number];
   'visibleItemsChange': [ids: string[]];
+  'row-click': [item: any];
 }>();
 
 const search = ref('');
@@ -251,9 +252,9 @@ const formTitle = computed(() => {
 });
 
 function handleRowClick(item: any) {
-  if (item?.id) {
-    emit('update:selectedId', item.id === props.selectedId ? undefined : item.id);
-  }
+  emit('row-click', item);
+  editItem(item);
+  emit('update:selectedId', item.id);
 }
 
 function getNestedValue(obj: any, path: string): any {
@@ -404,6 +405,11 @@ async function confirmDelete() {
 function updateFormData(data: any) {
   editedItem.value = { ...editedItem.value, ...data };
 }
+
+// Add defineExpose at the end of the script setup
+defineExpose({
+  editItem
+});
 </script>
 
 <style>
