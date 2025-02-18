@@ -16,7 +16,7 @@
         <v-pagination
           v-model="currentPage"
           :length="totalPages"
-          :total-visible="7"
+          :total-visible="2"
         />
         <div class="text-caption mt-2">
           Total {{ totalItems }} items
@@ -26,7 +26,7 @@
 
     <!-- Top Toolbar -->
     <template v-slot:top>
-      <v-toolbar flat>
+      <v-toolbar>
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-divider class="mx-4" inset vertical />
         <v-spacer />
